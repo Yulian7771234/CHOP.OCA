@@ -51,9 +51,7 @@ orderPageDiv.innerHTML = `
                 <label style="color:#FFD966; display:block; margin-bottom:6px;">Тип услуги / сотрудничество</label>
                 <select id="serviceType" style="width:100%; padding:12px; border-radius: 40px; background:#2c2c1a; color:#FFD966; border:none;">
                     <option>Охрана объекта (стационарный пост)</option>
-                    <option>Мобильная группа (ГБР)</option>
-                    <option>Пультовая охрана / видеонаблюдение</option>
-                    <option>Консультация и тендерное сопровождение</option>
+                    <option>Консультация</option>
                     <option>Сотрудничество / партнерство</option>
                 </select>
             </div>
