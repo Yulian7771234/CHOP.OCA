@@ -6,10 +6,30 @@ document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
         if (targetId === '#order-page') return;
         const target = document.querySelector(targetId);
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Закрываем бургер-меню после клика
+        const navLinks = document.getElementById('navLinks');
+        if (navLinks && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+        }
     });
 });
 
-// ===== МОДАЛЬНОЕ ОКНО ЗАКАЗА (без поля "Тип услуги", отправка на Formspree) =====
+// Бургер-меню
+const burger = document.getElementById('burgerMenu');
+const navLinks = document.getElementById('navLinks');
+if (burger && navLinks) {
+    burger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+    // Закрытие при клике вне меню
+    document.addEventListener('click', (event) => {
+        if (!navLinks.contains(event.target) && !burger.contains(event.target)) {
+            navLinks.classList.remove('active');
+        }
+    });
+}
+
+// ===== МОДАЛЬНОЕ ОКНО ЗАКАЗА =====
 const orderPageDiv = document.createElement('div');
 orderPageDiv.id = 'orderPage';
 orderPageDiv.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a00;z-index:1000;overflow-y:auto;padding:40px 20px;backdrop-filter:blur(12px);display:none;';
@@ -19,7 +39,6 @@ orderPageDiv.innerHTML = `
             <h2 style="color:#FFC107;font-size:2rem;"> Оставить заявку</h2>
             <button id="closeOrderPage" style="background:none;border:none;font-size:2rem;color:#FFC107;cursor:pointer;">&times;</button>
         </div>
-        <!-- Атрибут action ЗАМЕНИТЕ НА СВОЙ ЭНДПОЙНТ ПОСЛЕ РЕГИСТРАЦИИ НА FORMSPREE -->
         <form action="https://formspree.io/f/meedbqzy" method="POST" id="requestForm">
             <div style="margin-bottom:20px;">
                 <label style="color:#FFD966;display:block;margin-bottom:6px;">Ваше имя *</label>
@@ -67,12 +86,10 @@ orderPageDiv.addEventListener('click', (e) => {
     if (e.target === orderPageDiv) closeOrderPage();
 });
 
-// Отправка на Formspree (без alert, после отправки закрываем модалку и показываем уведомление)
+// Отправка на Formspree
 const requestForm = document.getElementById('requestForm');
 if (requestForm) {
     requestForm.addEventListener('submit', (e) => {
-        // Не вызываем e.preventDefault() – форма отправится нормально.
-        // Чтобы модалка закрылась после отправки, добавим небольшую задержку.
         setTimeout(() => {
             closeOrderPage();
             alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
@@ -80,7 +97,7 @@ if (requestForm) {
     });
 }
 
-// ===== СЛАЙДЕР ===== (без изменений, оставляем как есть)
+// ===== СЛАЙДЕР С БЕСКОНЕЧНОЙ ПРОКРУТКОЙ =====
 (function initSlider() {
     const images = [
         "img/авто.jpg",
