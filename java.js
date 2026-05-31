@@ -1,4 +1,4 @@
-// Плавный скролл для ссылок
+// Плавный скролл для ссылок + закрытие бургера
 document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -6,11 +6,8 @@ document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
         if (targetId === '#order-page') return;
         const target = document.querySelector(targetId);
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Закрываем бургер-меню после клика
         const navLinks = document.getElementById('navLinks');
-        if (navLinks && navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-        }
+        if (navLinks && navLinks.classList.contains('active')) navLinks.classList.remove('active');
     });
 });
 
@@ -18,14 +15,9 @@ document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
 const burger = document.getElementById('burgerMenu');
 const navLinks = document.getElementById('navLinks');
 if (burger && navLinks) {
-    burger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-    // Закрытие при клике вне меню
+    burger.addEventListener('click', () => navLinks.classList.toggle('active'));
     document.addEventListener('click', (event) => {
-        if (!navLinks.contains(event.target) && !burger.contains(event.target)) {
-            navLinks.classList.remove('active');
-        }
+        if (!navLinks.contains(event.target) && !burger.contains(event.target)) navLinks.classList.remove('active');
     });
 }
 
@@ -36,73 +28,42 @@ orderPageDiv.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%
 orderPageDiv.innerHTML = `
     <div style="max-width:650px;margin:0 auto;background:#000000cc;border:2px solid #FFC107;border-radius:48px;padding:32px 28px;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
-            <h2 style="color:#FFC107;font-size:2rem;"> Оставить заявку</h2>
+            <h2 style="color:#FFC107;font-size:2rem;">Оставить заявку</h2>
             <button id="closeOrderPage" style="background:none;border:none;font-size:2rem;color:#FFC107;cursor:pointer;">&times;</button>
         </div>
         <form action="https://formspree.io/f/meedbqzy" method="POST" id="requestForm">
-            <div style="margin-bottom:20px;">
-                <label style="color:#FFD966;display:block;margin-bottom:6px;">Ваше имя *</label>
-                <input type="text" name="name" id="userName" required style="width:100%;padding:12px;border-radius:40px;border:none;background:#2c2c1a;color:#FFD966;">
-            </div>
-            <div style="margin-bottom:20px;">
-                <label style="color:#FFD966;display:block;margin-bottom:6px;">Контактный телефон *</label>
-                <input type="tel" name="phone" id="userPhone" required style="width:100%;padding:12px;border-radius:40px;background:#2c2c1a;color:#FFD966;border:none;">
-            </div>
-            <div style="margin-bottom:20px;">
-                <label style="color:#FFD966;display:block;margin-bottom:6px;">Email</label>
-                <input type="email" name="email" id="userEmail" style="width:100%;padding:12px;border-radius:40px;background:#2c2c1a;color:#FFD966;border:none;">
-            </div>
-            <div style="margin-bottom:24px;">
-                <label style="color:#FFD966;display:block;margin-bottom:6px;">Детали запроса</label>
-                <textarea name="message" id="message" rows="3" style="width:100%;padding:12px;border-radius:24px;background:#2c2c1a;color:#FFD966;border:none;" placeholder="Опишите объект, требуемые услуги..."></textarea>
-            </div>
-            <button type="submit" style="background:#FFC107;border:none;padding:14px 24px;border-radius:40px;font-weight:bold;font-size:1rem;width:100%;cursor:pointer;"> Отправить запрос</button>
+            <div style="margin-bottom:20px;"><label style="color:#FFD966;display:block;margin-bottom:6px;">Ваше имя *</label><input type="text" name="name" id="userName" required style="width:100%;padding:12px;border-radius:40px;border:none;background:#2c2c1a;color:#FFD966;"></div>
+            <div style="margin-bottom:20px;"><label style="color:#FFD966;display:block;margin-bottom:6px;">Контактный телефон *</label><input type="tel" name="phone" id="userPhone" required style="width:100%;padding:12px;border-radius:40px;background:#2c2c1a;color:#FFD966;border:none;"></div>
+            <div style="margin-bottom:20px;"><label style="color:#FFD966;display:block;margin-bottom:6px;">Email</label><input type="email" name="email" id="userEmail" style="width:100%;padding:12px;border-radius:40px;background:#2c2c1a;color:#FFD966;border:none;"></div>
+            <div style="margin-bottom:24px;"><label style="color:#FFD966;display:block;margin-bottom:6px;">Детали запроса</label><textarea name="message" id="message" rows="3" style="width:100%;padding:12px;border-radius:24px;background:#2c2c1a;color:#FFD966;border:none;" placeholder="Опишите объект, требуемые услуги..."></textarea></div>
+            <button type="submit" style="background:#FFC107;border:none;padding:14px 24px;border-radius:40px;font-weight:bold;font-size:1rem;width:100%;cursor:pointer;">📩 Отправить запрос</button>
             <p style="color:#FFD966aa;font-size:0.8rem;margin-top:15px;">Нажимая «Отправить», вы соглашаетесь с обработкой данных.</p>
         </form>
     </div>
 `;
 document.body.appendChild(orderPageDiv);
 
-function openOrderPage() {
-    orderPageDiv.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-function closeOrderPage() {
-    orderPageDiv.style.display = 'none';
-    document.body.style.overflow = '';
-}
+function openOrderPage() { orderPageDiv.style.display = 'block'; document.body.style.overflow = 'hidden'; }
+function closeOrderPage() { orderPageDiv.style.display = 'none'; document.body.style.overflow = ''; }
 
-const orderFloatBtn = document.getElementById('orderFloatBtn');
-const orderNavBtn = document.getElementById('orderNavBtn');
-if (orderFloatBtn) orderFloatBtn.addEventListener('click', openOrderPage);
-if (orderNavBtn) orderNavBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    openOrderPage();
-});
+document.getElementById('orderFloatBtn')?.addEventListener('click', openOrderPage);
+document.getElementById('orderNavBtn')?.addEventListener('click', (e) => { e.preventDefault(); openOrderPage(); });
+document.getElementById('closeOrderPage')?.addEventListener('click', closeOrderPage);
+orderPageDiv.addEventListener('click', (e) => { if (e.target === orderPageDiv) closeOrderPage(); });
 
-const closeBtn = document.getElementById('closeOrderPage');
-if (closeBtn) closeBtn.addEventListener('click', closeOrderPage);
-orderPageDiv.addEventListener('click', (e) => {
-    if (e.target === orderPageDiv) closeOrderPage();
-});
-
-// Отправка на Formspree
 const requestForm = document.getElementById('requestForm');
 if (requestForm) {
     requestForm.addEventListener('submit', (e) => {
-        setTimeout(() => {
-            closeOrderPage();
-            alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
-        }, 100);
+        setTimeout(() => { closeOrderPage(); alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.'); }, 100);
     });
 }
 
-// ===== СЛАЙДЕР С БЕСКОНЕЧНОЙ ПРОКРУТКОЙ =====
+// ===== СЛАЙДЕР (пути изменены на img/auto.jpg, img/gruppa.jpg, img/monitor.avif) =====
 (function initSlider() {
     const images = [
-        "img/авто.jpg",
+        "img/auto.jpg",
         "img/gruppa.jpg",
-        "img/монитор.avif"
+        "img/monitor.avif"
     ];
     const container = document.getElementById('companySlider');
     if (!container) return;
@@ -185,7 +146,7 @@ if (requestForm) {
     startAutoSlide();
 })();
 
-// ===== СТРЕЛКА ПРОКРУТКИ (полупрозрачная, удержание) =====
+// ===== СТРЕЛКА ПРОКРУТКИ =====
 const scrollBtn = document.getElementById('scrollDownBtn');
 if (scrollBtn) {
     let scrollInterval = null;
