@@ -657,3 +657,78 @@ footer {
         font-size: 1.2rem;
     }
 }
+
+/* Cookie баннер – улучшенная видимость, кнопки одинакового размера */
+#cookieConsentBanner {
+    background: rgba(34, 34, 34, 0.95) !important;
+    backdrop-filter: blur(4px);
+    padding: 20px !important;
+    font-size: 14px;
+}
+
+#cookieConsentBanner button {
+    min-width: 140px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#cookieAcceptBtn {
+    background: #FFC107;
+    color: #000;
+    border: none;
+}
+
+#cookieAcceptBtn:hover {
+    background: #e5b800;
+    transform: scale(1.02);
+}
+
+#cookieRejectBtn {
+    background: transparent;
+    color: #FFC107;
+    border: 1px solid #FFC107;
+}
+
+#cookieRejectBtn:hover {
+    background: rgba(255, 193, 7, 0.1);
+}
+
+/* Cookie баннер – улучшенная видимость */
+#cookieConsentBanner {
+    background: rgba(34, 34, 34, 0.95) !important;
+    backdrop-filter: blur(4px);
+    padding: 20px !important;
+    font-size: 14px;
+}
+
+#cookieConsentBanner button {
+    min-width: 140px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#cookieAcceptBtn {
+    background: #FFC107;
+    color: #000;
+    border: none;
+}
+
+#cookieAcceptBtn:hover {
+    background: #e5b800;
+}
+
+#cookieRejectBtn {
+    background: transparent;
+    color: #FFC107;
+    border: 1px solid #FFC107;
+}
+
+#cookieRejectBtn:hover {
+    background: rgba(255, 193, 7, 0.1);
+}

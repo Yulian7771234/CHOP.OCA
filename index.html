@@ -9,19 +9,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <!-- Яндекс.Метрика (обезличенная) -->
+    <script>
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(12345678, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: false,
+            trackHash: true,
+            ecommerce: false,
+            params: { __ym: { "ymClientId": "auto" } },
+            // Обезличивание данных
+            userParams: { __ym: { "ymClientId": "auto", "ip": false, "coordinates": false } }
+        });
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/12345678" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
 </head>
 
 <body>
     <header class="header">
         <div class="container header-inner">
-            <div class="burger" id="burgerMenu">
-                <i class="fas fa-bars"></i>
-            </div>
+            <div class="burger" id="burgerMenu"><i class="fas fa-bars"></i></div>
             <a href="#hero" class="logo-link">
-                <div class="logo">
-                    <img src="logo.png" alt="Логотип" class="logo-img">
-                    <span>ЧОО "ОСА"</span>
-                </div>
+                <div class="logo"><img src="logo.png" alt="Логотип" class="logo-img"><span>ЧОО "ОСА"</span></div>
             </a>
             <div class="nav-links" id="navLinks">
                 <a href="#about">О компании</a>
@@ -46,8 +63,7 @@
             <div class="container">
                 <div class="section-title">О компании</div>
                 <div id="companySlider"></div>
-                <div class="company-text">
-                    <i class="fas fa-building"></i>
+                <div class="company-text"><i class="fas fa-building"></i>
                     <h3>Общество с ограниченной ответственностью частная охранная организация "ОХРАННОЕ СЫСКНОЕ
                         АГЕНТСТВО"</h3>
                     <p>Большой опыт, комплексная безопасность объектов любой сложности. Лицензированные сотрудники. Наша
@@ -140,70 +156,15 @@
     <footer>
         <div class="container">
             <p>© 2026 ЧОО "ОСА" — Все права защищены.</p>
-            <p style="font-size: 0.8rem; margin-top: 8px;">
-                <a href="privacy.html" style="color:#FFD966;">Политика конфиденциальности</a>
-            </p>
-            <p style="font-size: 0.7rem; margin-top: 8px;">
-                ИНН 5017124885 | ОГРН 1215000000511 | Лицензия № Л056-00106-50/00036143 от 23.07.2021 (ГУ Росгвардии по
-                Московской области)
-            </p>
+            <p style="font-size: 0.8rem; margin-top: 8px;"><a href="privacy.html" style="color:#FFD966;">Политика
+                    конфиденциальности</a></p>
+            <p style="font-size: 0.7rem; margin-top: 8px;">ИНН 5017124885 | ОГРН 1215000000511 | Лицензия №
+                Л056-00106-50/00036143 от 23.07.2021 (ГУ Росгвардии по Московской области)</p>
         </div>
     </footer>
-    <button id="scrollDownBtn" class="scroll-down-btn" aria-label="Прокрутить вниз">
-        <i class="fas fa-arrow-down"></i>
-    </button>
+    <button id="scrollDownBtn" class="scroll-down-btn" aria-label="Прокрутить вниз"><i
+            class="fas fa-arrow-down"></i></button>
     <script src="java.js"></script>
-    <!-- Cookie Consent Banner -->
-    <div id="cookieConsentBanner"
-        style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #222; color: #fff; padding: 15px; text-align: center; z-index: 9999; box-shadow: 0 -2px 10px rgba(0,0,0,0.2);">
-        <div
-            style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 10px;">
-            <p style="margin: 0; font-size: 14px; line-height: 1.4;">Мы используем cookies для улучшения работы сайта.
-                Продолжая пользоваться сайтом, вы даете согласие на обработку файлов cookie. Подробнее — в <a
-                    href="privacy.html" target="_blank" style="color: #FFC107; text-decoration: underline;">Политике
-                    конфиденциальности</a>.</p>
-            <div style="display: flex; gap: 15px;">
-                <button id="cookieAcceptBtn"
-                    style="background: #FFC107; color: #000; border: none; padding: 8px 25px; border-radius: 30px; cursor: pointer; font-weight: bold;">Принять
-                    всё</button>
-                <button id="cookieRejectBtn"
-                    style="background: transparent; color: #FFC107; border: 1px solid #FFC107; padding: 8px 25px; border-radius: 30px; cursor: pointer;">Отклонить
-                    всё</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Cookie Consent Banner Logic
-        document.addEventListener('DOMContentLoaded', function () {
-            const cookieBanner = document.getElementById('cookieConsentBanner');
-            const acceptBtn = document.getElementById('cookieAcceptBtn');
-            const rejectBtn = document.getElementById('cookieRejectBtn');
-
-            // Check if user has already made a choice
-            const cookieConsent = localStorage.getItem('cookieConsent');
-            if (cookieConsent === null) {
-                // Show the banner if no choice has been made yet
-                cookieBanner.style.display = 'block';
-            }
-
-            // Accept button logic
-            acceptBtn.addEventListener('click', function () {
-                localStorage.setItem('cookieConsent', 'accepted');
-                cookieBanner.style.display = 'none';
-                console.log('Cookies accepted. You can now enable tracking scripts here.');
-                // Here you can activate your analytics scripts
-            });
-
-            // Reject button logic
-            rejectBtn.addEventListener('click', function () {
-                localStorage.setItem('cookieConsent', 'rejected');
-                cookieBanner.style.display = 'none';
-                console.log('Cookies rejected. Tracking scripts should be disabled.');
-                // Here you can ensure that no analytics scripts are loaded
-            });
-        });
-    </script>
 </body>
 
 </html>
