@@ -153,6 +153,57 @@
         <i class="fas fa-arrow-down"></i>
     </button>
     <script src="java.js"></script>
+    <!-- Cookie Consent Banner -->
+    <div id="cookieConsentBanner"
+        style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #222; color: #fff; padding: 15px; text-align: center; z-index: 9999; box-shadow: 0 -2px 10px rgba(0,0,0,0.2);">
+        <div
+            style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <p style="margin: 0; font-size: 14px; line-height: 1.4;">Мы используем cookies для улучшения работы сайта.
+                Продолжая пользоваться сайтом, вы даете согласие на обработку файлов cookie. Подробнее — в <a
+                    href="privacy.html" target="_blank" style="color: #FFC107; text-decoration: underline;">Политике
+                    конфиденциальности</a>.</p>
+            <div style="display: flex; gap: 15px;">
+                <button id="cookieAcceptBtn"
+                    style="background: #FFC107; color: #000; border: none; padding: 8px 25px; border-radius: 30px; cursor: pointer; font-weight: bold;">Принять
+                    всё</button>
+                <button id="cookieRejectBtn"
+                    style="background: transparent; color: #FFC107; border: 1px solid #FFC107; padding: 8px 25px; border-radius: 30px; cursor: pointer;">Отклонить
+                    всё</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cookie Consent Banner Logic
+        document.addEventListener('DOMContentLoaded', function () {
+            const cookieBanner = document.getElementById('cookieConsentBanner');
+            const acceptBtn = document.getElementById('cookieAcceptBtn');
+            const rejectBtn = document.getElementById('cookieRejectBtn');
+
+            // Check if user has already made a choice
+            const cookieConsent = localStorage.getItem('cookieConsent');
+            if (cookieConsent === null) {
+                // Show the banner if no choice has been made yet
+                cookieBanner.style.display = 'block';
+            }
+
+            // Accept button logic
+            acceptBtn.addEventListener('click', function () {
+                localStorage.setItem('cookieConsent', 'accepted');
+                cookieBanner.style.display = 'none';
+                console.log('Cookies accepted. You can now enable tracking scripts here.');
+                // Here you can activate your analytics scripts
+            });
+
+            // Reject button logic
+            rejectBtn.addEventListener('click', function () {
+                localStorage.setItem('cookieConsent', 'rejected');
+                cookieBanner.style.display = 'none';
+                console.log('Cookies rejected. Tracking scripts should be disabled.');
+                // Here you can ensure that no analytics scripts are loaded
+            });
+        });
+    </script>
 </body>
 
 </html>

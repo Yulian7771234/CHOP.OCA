@@ -21,21 +21,23 @@ if (burger && navLinks) {
     });
 }
 
-// ===== МОДАЛЬНОЕ ОКНО ЗАКАЗА С ЯНДЕКС.ФОРМОЙ =====
+// ===== МОДАЛЬНОЕ ОКНО ЗАКАЗА (белый фон, белая рамка, чёрный текст) =====
 const orderPageDiv = document.createElement('div');
 orderPageDiv.id = 'orderPage';
-orderPageDiv.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a00;z-index:1000;overflow-y:auto;padding:40px 20px;backdrop-filter:blur(12px);display:none;';
+orderPageDiv.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:1000;overflow-y:auto;padding:40px 20px;display:none;';
 orderPageDiv.innerHTML = `
-    <div style="max-width:650px;margin:0 auto;background:#000000cc;border:2px solid #FFC107;border-radius:48px;padding:32px 28px;">
+    <div style="max-width:650px;margin:0 auto;background:#ffffff;border:2px solid #ffffff;border-radius:48px;padding:32px 28px;box-shadow:0 20px 35px rgba(0,0,0,0.3);">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
-            <h2 style="color:#FFC107;font-size:2rem;">Оставить заявку</h2>
-            <button id="closeOrderPage" style="background:none;border:none;font-size:2rem;color:#FFC107;cursor:pointer;">&times;</button>
+            <h2 style="color:#000000;font-size:2rem;font-weight:700;margin:0;">Оставить заявку</h2>
+            <button id="closeOrderPage" style="background:none;border:none;font-size:2rem;color:#000;cursor:pointer;transition:0.2s;">&times;</button>
         </div>
-        <script src="https://forms.yandex.ru/_static/embed.js"></script>
-        <iframe src="https://forms.yandex.ru/u/6a2093881f1eb56f6ea83880?iframe=1" 
-                frameborder="0" 
-                name="ya-form-6a2093881f1eb56f6ea83880" 
-                style="width:100%; height:600px; border-radius:24px;"></iframe>
+        <div style="background:#ffffff; border-radius:24px; overflow:hidden;">
+            <script src="https://forms.yandex.ru/_static/embed.js"></script>
+            <iframe src="https://forms.yandex.ru/u/6a2093881f1eb56f6ea83880?iframe=1" 
+                    frameborder="0" 
+                    name="ya-form-6a2093881f1eb56f6ea83880" 
+                    style="width:100%; height:600px; border:none; background:#fff;"></iframe>
+        </div>
     </div>
 `;
 document.body.appendChild(orderPageDiv);
