@@ -53,7 +53,6 @@ img {
     position: relative;
 }
 
-/* Бургер-меню */
 .burger {
     display: none;
     font-size: 1.8rem;
@@ -270,18 +269,6 @@ img {
     gap: 10px;
 }
 
-.review-text {
-    font-style: italic;
-    margin: 15px 0;
-    color: #FFF2CE;
-}
-
-.review-author {
-    font-weight: 700;
-    margin-top: 12px;
-    color: #FFC107;
-}
-
 .contacts-flex {
     display: flex;
     flex-wrap: wrap;
@@ -387,7 +374,7 @@ footer {
     border-top: 1px solid rgba(255, 193, 7, .2);
 }
 
-/* Горизонтальный слайдер */
+/* Слайдер */
 .slider-horizontal {
     position: relative;
     width: 100%;
@@ -535,7 +522,6 @@ footer {
     transform: scale(1.05);
 }
 
-/* === АДАПТИВНОСТЬ === */
 @media (max-width: 768px) {
     .burger {
         display: block;

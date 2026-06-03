@@ -21,7 +21,7 @@ if (burger && navLinks) {
     });
 }
 
-// ===== МОДАЛЬНОЕ ОКНО ЗАКАЗА =====
+// ===== МОДАЛЬНОЕ ОКНО ЗАКАЗА С ЯНДЕКС.ФОРМОЙ =====
 const orderPageDiv = document.createElement('div');
 orderPageDiv.id = 'orderPage';
 orderPageDiv.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a00;z-index:1000;overflow-y:auto;padding:40px 20px;backdrop-filter:blur(12px);display:none;';
@@ -31,14 +31,11 @@ orderPageDiv.innerHTML = `
             <h2 style="color:#FFC107;font-size:2rem;">Оставить заявку</h2>
             <button id="closeOrderPage" style="background:none;border:none;font-size:2rem;color:#FFC107;cursor:pointer;">&times;</button>
         </div>
-        <form action="https://formspree.io/f/meedbqzy" method="POST" id="requestForm">
-            <div style="margin-bottom:20px;"><label style="color:#FFD966;display:block;margin-bottom:6px;">Ваше имя *</label><input type="text" name="name" id="userName" required style="width:100%;padding:12px;border-radius:40px;border:none;background:#2c2c1a;color:#FFD966;"></div>
-            <div style="margin-bottom:20px;"><label style="color:#FFD966;display:block;margin-bottom:6px;">Контактный телефон *</label><input type="tel" name="phone" id="userPhone" required style="width:100%;padding:12px;border-radius:40px;background:#2c2c1a;color:#FFD966;border:none;"></div>
-            <div style="margin-bottom:20px;"><label style="color:#FFD966;display:block;margin-bottom:6px;">Email</label><input type="email" name="email" id="userEmail" style="width:100%;padding:12px;border-radius:40px;background:#2c2c1a;color:#FFD966;border:none;"></div>
-            <div style="margin-bottom:24px;"><label style="color:#FFD966;display:block;margin-bottom:6px;">Детали запроса</label><textarea name="message" id="message" rows="3" style="width:100%;padding:12px;border-radius:24px;background:#2c2c1a;color:#FFD966;border:none;" placeholder="Опишите объект, требуемые услуги..."></textarea></div>
-            <button type="submit" style="background:#FFC107;border:none;padding:14px 24px;border-radius:40px;font-weight:bold;font-size:1rem;width:100%;cursor:pointer;">📩 Отправить запрос</button>
-            <p style="color:#FFD966aa;font-size:0.8rem;margin-top:15px;">Нажимая «Отправить», вы соглашаетесь с обработкой данных.</p>
-        </form>
+        <script src="https://forms.yandex.ru/_static/embed.js"></script>
+        <iframe src="https://forms.yandex.ru/u/6a2093881f1eb56f6ea83880?iframe=1" 
+                frameborder="0" 
+                name="ya-form-6a2093881f1eb56f6ea83880" 
+                style="width:100%; height:600px; border-radius:24px;"></iframe>
     </div>
 `;
 document.body.appendChild(orderPageDiv);
@@ -51,14 +48,7 @@ document.getElementById('orderNavBtn')?.addEventListener('click', (e) => { e.pre
 document.getElementById('closeOrderPage')?.addEventListener('click', closeOrderPage);
 orderPageDiv.addEventListener('click', (e) => { if (e.target === orderPageDiv) closeOrderPage(); });
 
-const requestForm = document.getElementById('requestForm');
-if (requestForm) {
-    requestForm.addEventListener('submit', (e) => {
-        setTimeout(() => { closeOrderPage(); alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.'); }, 100);
-    });
-}
-
-// ===== СЛАЙДЕР (пути изменены на img/auto.jpg, img/gruppa.jpg, img/monitor.avif) =====
+// ===== СЛАЙДЕР (без изменений) =====
 (function initSlider() {
     const images = [
         "img/auto.jpg",
