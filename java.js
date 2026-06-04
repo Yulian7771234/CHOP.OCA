@@ -110,7 +110,7 @@ if (scrollBtn) {
     scrollBtn.addEventListener('mouseleave', stopScroll);
 }
 
-// ===== 5. COOKIE-БАННЕР + ЗАГРУЗКА ЯНДЕКС.МЕТРИКИ ПОСЛЕ СОГЛАСИЯ =====
+// ===== 5. COOKIE-БАННЕР + ЗАГРУЗКА МЕТРИКИ ТОЛЬКО ПОСЛЕ СОГЛАСИЯ =====
 function loadYandexMetrika() {
     if (document.querySelector('script[src*="mc.yandex.ru/metrika/tag.js"]')) return;
     const script = document.createElement('script');
@@ -125,12 +125,7 @@ function loadYandexMetrika() {
             clickmap: true,
             trackLinks: true,
             accurateTrackBounce: true,
-            webvisor: false,
-            trackHash: true,
-            ecommerce: false,
-            params: { __ym: { "ymClientId": "auto" } },
-            // Обезличивание данных (важно для 152-ФЗ)
-            userParams: { __ym: { "ymClientId": "auto", "ip": false, "coordinates": false } }
+            trackHash: true
         });
     };
     const noscript = document.createElement('noscript');
@@ -141,7 +136,6 @@ function loadYandexMetrika() {
 function initCookieBanner() {
     const banner = document.createElement('div');
     banner.id = 'cookieConsentBanner';
-    banner.style.cssText = 'position:fixed;bottom:0;left:0;width:100%;background:#222;color:#fff;padding:15px;text-align:center;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2);';
     banner.innerHTML = `
         <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;">
             <p style="margin:0;font-size:14px;">Мы используем cookie для улучшения работы сайта. Продолжая, вы даете согласие на обработку данных. Подробнее — <a href="privacy.html" target="_blank" style="color:#FFC107;">в Политике</a>.</p>
@@ -152,7 +146,6 @@ function initCookieBanner() {
         </div>
     `;
     document.body.appendChild(banner);
-
     const consent = localStorage.getItem('cookieConsent');
     if (consent === 'accepted') {
         banner.style.display = 'none';
@@ -162,7 +155,6 @@ function initCookieBanner() {
     } else {
         banner.style.display = 'flex';
     }
-
     document.getElementById('cookieAcceptBtn')?.addEventListener('click', () => {
         localStorage.setItem('cookieConsent', 'accepted');
         banner.style.display = 'none';
