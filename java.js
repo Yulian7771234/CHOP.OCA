@@ -122,14 +122,15 @@ function loadYandexMetrika() {
         window.ym = window.ym || function () { (window.ym.a = window.ym.a || []).push(arguments); };
         window.ym.l = new Date().getTime();
         ym(109627437, 'init', {
-            ssr: true,
-            webvisor: true,
             clickmap: true,
-            ecommerce: "dataLayer",
-            referrer: document.referrer,
-            url: location.href,
+            trackLinks: true,
             accurateTrackBounce: true,
-            trackLinks: true
+            webvisor: false,
+            trackHash: true,
+            ecommerce: false,
+            params: { __ym: { "ymClientId": "auto" } },
+            // Обезличивание данных (важно для 152-ФЗ)
+            userParams: { __ym: { "ymClientId": "auto", "ip": false, "coordinates": false } }
         });
     };
     const noscript = document.createElement('noscript');
