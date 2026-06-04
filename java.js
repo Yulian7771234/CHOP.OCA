@@ -25,14 +25,13 @@ const orderPageDiv = document.createElement('div');
 orderPageDiv.id = 'orderPage';
 orderPageDiv.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:1000;overflow-y:auto;padding:40px 20px;display:none;';
 orderPageDiv.innerHTML = `
-    
-        <div style="max-width:650px;margin:0 auto;background:#ffffff;border:2px solid #ffffff;border-radius:48px;padding:32px 28px;box-shadow:0 20px 35px rgba(0,0,0,0.3);">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
-        <h2 style="color:#000000;font-size:2rem;font-weight:700;margin:0;">Оставить заявку</h2>
-        <button id="closeOrderPage" style="background:none;border:none;font-size:2rem;color:#000;cursor:pointer;">&times;</button>
+    <div style="max-width:650px;margin:0 auto;background:#ffffff;border:2px solid #ffffff;border-radius:48px;padding:32px 28px;box-shadow:0 20px 35px rgba(0,0,0,0.3);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+            <h2 style="color:#000000;font-size:2rem;font-weight:700;margin:0;">Оставить заявку</h2>
+            <button id="closeOrderPage" style="background:none;border:none;font-size:2rem;color:#000;cursor:pointer;">&times;</button>
+        </div>
+        <iframe src="https://forms.yandex.ru/u/6a20b88e49af4771382c7582?iframe=1" frameborder="0" name="ya-form-6a20b88e49af4771382c7582" style="width:100%; height:600px; border:none; background:#fff;"></iframe>
     </div>
-    <iframe src="https://forms.yandex.ru/u/6a20b88e49af4771382c7582?iframe=1" frameborder="0" name="ya-form-6a20b88e49af4771382c7582" style="width:100%; height:600px; border:none; background:#fff;"></iframe>
-</div>
 `;
 document.body.appendChild(orderPageDiv);
 
@@ -114,14 +113,11 @@ if (scrollBtn) {
 // ===== 5. COOKIE-БАННЕР + ЗАГРУЗКА ЯНДЕКС.МЕТРИКИ ПОСЛЕ СОГЛАСИЯ =====
 function loadYandexMetrika() {
     if (document.querySelector('script[src*="mc.yandex.ru/metrika/tag.js"]')) return;
-    // Динамически загружаем скрипт Метрики
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = 'https://mc.yandex.ru/metrika/tag.js?id=109627437';
     script.async = true;
     document.head.appendChild(script);
-
-    // Инициализируем счётчик после загрузки скрипта
     script.onload = () => {
         window.ym = window.ym || function () { (window.ym.a = window.ym.a || []).push(arguments); };
         window.ym.l = new Date().getTime();
@@ -136,8 +132,6 @@ function loadYandexMetrika() {
             trackLinks: true
         });
     };
-
-    // Добавляем noscript-картинку
     const noscript = document.createElement('noscript');
     noscript.innerHTML = '<div><img src="https://mc.yandex.ru/watch/109627437" style="position:absolute; left:-9999px;" alt="" /></div>';
     document.body.appendChild(noscript);
@@ -161,10 +155,9 @@ function initCookieBanner() {
     const consent = localStorage.getItem('cookieConsent');
     if (consent === 'accepted') {
         banner.style.display = 'none';
-        loadYandexMetrika(); // Если согласие уже было, загружаем Метрику
+        loadYandexMetrika();
     } else if (consent === 'rejected') {
         banner.style.display = 'none';
-        // Метрику не загружаем
     } else {
         banner.style.display = 'flex';
     }
@@ -172,12 +165,11 @@ function initCookieBanner() {
     document.getElementById('cookieAcceptBtn')?.addEventListener('click', () => {
         localStorage.setItem('cookieConsent', 'accepted');
         banner.style.display = 'none';
-        loadYandexMetrika(); // Загружаем Метрику после принятия
+        loadYandexMetrika();
     });
     document.getElementById('cookieRejectBtn')?.addEventListener('click', () => {
         localStorage.setItem('cookieConsent', 'rejected');
         banner.style.display = 'none';
-        // Метрику не загружаем
     });
 }
 initCookieBanner();
