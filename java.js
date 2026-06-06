@@ -122,10 +122,14 @@ function loadYandexMetrika() {
         window.ym = window.ym || function () { (window.ym.a = window.ym.a || []).push(arguments); };
         window.ym.l = new Date().getTime();
         ym(109627437, 'init', {
+            ssr: true,
+            webvisor: true,
             clickmap: true,
-            trackLinks: true,
+            ecommerce: "dataLayer",
+            referrer: document.referrer,
+            url: location.href,
             accurateTrackBounce: true,
-            trackHash: true
+            trackLinks: true
         });
     };
     const noscript = document.createElement('noscript');
@@ -138,7 +142,7 @@ function initCookieBanner() {
     banner.id = 'cookieConsentBanner';
     banner.innerHTML = `
         <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;">
-            <p style="margin:0;font-size:14px;">Мы используем cookie для улучшения работы сайта. Продолжая, вы даете согласие на обработку данных. Подробнее — <a href="privacy.html" target="_blank" style="color:#FFC107;">в Политике</a>.</p>
+            <p style="margin:0;font-size:14px;">Мы используем cookie для улучшения работы сайта. Продолжая, вы даете согласие на обработку данных. Подробнее — <a href="privacy.html" target="_blank" style="color:#FFC107;">в Политике конфиденциальности</a>.</p>
             <div style="display:flex;gap:15px;">
                 <button id="cookieAcceptBtn" style="background:#FFC107;color:#000;border:none;padding:8px 25px;border-radius:30px;cursor:pointer;font-weight:bold;min-width:140px;">Принять всё</button>
                 <button id="cookieRejectBtn" style="background:transparent;color:#FFC107;border:1px solid #FFC107;padding:8px 25px;border-radius:30px;cursor:pointer;min-width:140px;">Отклонить всё</button>
