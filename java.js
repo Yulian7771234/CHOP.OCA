@@ -20,7 +20,7 @@ if (burger && navLinks) {
     });
 }
 
-// ===== 2. МОДАЛЬНОЕ ОКНО ЗАКАЗА (Яндекс.Форма) =====
+// ===== 2. МОДАЛЬНОЕ ОКНО ЗАКАЗА (НОВАЯ ЯНДЕКС.ФОРМА) =====
 const orderPageDiv = document.createElement('div');
 orderPageDiv.id = 'orderPage';
 orderPageDiv.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:1000;overflow-y:auto;padding:40px 20px;display:none;';
@@ -30,7 +30,10 @@ orderPageDiv.innerHTML = `
             <h2 style="color:#000000;font-size:2rem;font-weight:700;margin:0;">Оставить заявку</h2>
             <button id="closeOrderPage" style="background:none;border:none;font-size:2rem;color:#000;cursor:pointer;">&times;</button>
         </div>
-        <iframe src="https://forms.yandex.ru/u/6a20b88e49af4771382c7582?iframe=1" frameborder="0" name="ya-form-6a20b88e49af4771382c7582" style="width:100%; height:600px; border:none; background:#fff;"></iframe>
+        <iframe src="https://forms.yandex.ru/cloud/6a24a42b49af47342b1ffba8?iframe=1" 
+                frameborder="0" 
+                name="ya-form-6a24a42b49af47342b1ffba8" 
+                style="width:100%; height:600px; border:none; background:#fff;"></iframe>
     </div>
 `;
 document.body.appendChild(orderPageDiv);
