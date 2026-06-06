@@ -20,7 +20,7 @@ if (burger && navLinks) {
     });
 }
 
-// ===== 2. МОДАЛЬНОЕ ОКНО ЗАКАЗА (НОВАЯ ЯНДЕКС.ФОРМА) =====
+// ===== 2. МОДАЛЬНОЕ ОКНО ЗАКАЗА (Яндекс.Форма) =====
 const orderPageDiv = document.createElement('div');
 orderPageDiv.id = 'orderPage';
 orderPageDiv.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:1000;overflow-y:auto;padding:40px 20px;display:none;';
@@ -30,10 +30,7 @@ orderPageDiv.innerHTML = `
             <h2 style="color:#000000;font-size:2rem;font-weight:700;margin:0;">Оставить заявку</h2>
             <button id="closeOrderPage" style="background:none;border:none;font-size:2rem;color:#000;cursor:pointer;">&times;</button>
         </div>
-        <iframe src="https://forms.yandex.ru/cloud/6a24a42b49af47342b1ffba8?iframe=1" 
-                frameborder="0" 
-                name="ya-form-6a24a42b49af47342b1ffba8" 
-                style="width:100%; height:600px; border:none; background:#fff;"></iframe>
+        <iframe src="https://forms.yandex.ru/u/6a20b88e49af4771382c7582?iframe=1" frameborder="0" name="ya-form-6a20b88e49af4771382c7582" style="width:100%; height:600px; border:none; background:#fff;"></iframe>
     </div>
 `;
 document.body.appendChild(orderPageDiv);
@@ -125,14 +122,10 @@ function loadYandexMetrika() {
         window.ym = window.ym || function () { (window.ym.a = window.ym.a || []).push(arguments); };
         window.ym.l = new Date().getTime();
         ym(109627437, 'init', {
-            ssr: true,
-            webvisor: true,
             clickmap: true,
-            ecommerce: "dataLayer",
-            referrer: document.referrer,
-            url: location.href,
+            trackLinks: true,
             accurateTrackBounce: true,
-            trackLinks: true
+            trackHash: true
         });
     };
     const noscript = document.createElement('noscript');
@@ -145,7 +138,7 @@ function initCookieBanner() {
     banner.id = 'cookieConsentBanner';
     banner.innerHTML = `
         <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;">
-            <p style="margin:0;font-size:14px;">Мы используем cookie для улучшения работы сайта. Продолжая, вы даете согласие на обработку данных. Подробнее — <a href="privacy.html" target="_blank" style="color:#FFC107;">в Политике конфиденциальности</a>.</p>
+            <p style="margin:0;font-size:14px;">Мы используем cookie для улучшения работы сайта. Продолжая, вы даете согласие на обработку данных. Подробнее — <a href="privacy.html" target="_blank" style="color:#FFC107;">в Политике</a>.</p>
             <div style="display:flex;gap:15px;">
                 <button id="cookieAcceptBtn" style="background:#FFC107;color:#000;border:none;padding:8px 25px;border-radius:30px;cursor:pointer;font-weight:bold;min-width:140px;">Принять всё</button>
                 <button id="cookieRejectBtn" style="background:transparent;color:#FFC107;border:1px solid #FFC107;padding:8px 25px;border-radius:30px;cursor:pointer;min-width:140px;">Отклонить всё</button>
