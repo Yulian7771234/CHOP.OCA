@@ -86,12 +86,15 @@ img {
 }
 
 /* Стили для вашего логотипа-щита в шапке */
-.logo-shield {
+    .logo-shield {
     height: 65px;
     width: auto;
     filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
-    /* Золотое свечение */
     transition: transform 0.3s ease;
+    /* Добавляем светлую подложку, чтобы черный щит выделялся на черной шапке */
+    background: rgba(255, 255, 255, 0.1); 
+    border-radius: 8px;
+    padding: 4px;
 }
 
 .logo:hover .logo-shield {
