@@ -24,19 +24,32 @@ if (burger && navLinks) {
 
 // ===== 2. СЛАЙДЕР =====
 (function initSlider() {
-    const images = ["img/auto.jpg", "img/gruppa.jpg", "img/monitor.avif"];
+    // ВАЖНО: Если у вас в папке img файл называется monitor.avif, 
+    // лучше переименуйте его в monitor.jpg на GitHub, чтобы он грузился на всех телефонах.
+    // Здесь указаны 3 картинки, которые вы прислали.
+    const images = [
+        "img/auto.jpg", 
+        "img/gruppa.jpg", 
+        "img/monitor.jpg" 
+    ];
+    
     const container = document.getElementById('companySlider');
     if (!container) return;
+    
     const sliderHTML = `<div class="slider-horizontal"><div class="slider-track" id="sliderTrack">${images.map(src => `<div class="slide" style="background-image: url('${src}');"></div>`).join('')}</div><button class="slider-btn-prev"><i class="fas fa-chevron-left"></i></button><button class="slider-btn-next"><i class="fas fa-chevron-right"></i></button><div class="slider-dots" id="sliderDots"></div></div>`;
     container.innerHTML = sliderHTML;
+    
     const track = document.getElementById('sliderTrack');
     const slides = document.querySelectorAll('.slider-horizontal .slide');
     const prevBtn = document.querySelector('.slider-btn-prev');
     const nextBtn = document.querySelector('.slider-btn-next');
     const dotsContainer = document.getElementById('sliderDots');
+    
     if (!slides.length) return;
+    
     let currentIndex = 0, autoInterval;
     const totalSlides = slides.length;
+    
     function createDots() {
         dotsContainer.innerHTML = '';
         for (let i = 0; i < totalSlides; i++) {
@@ -47,25 +60,31 @@ if (burger && navLinks) {
             dotsContainer.appendChild(dot);
         }
     }
+    
     function goToSlide(index) {
         if (index === currentIndex) return;
         currentIndex = index;
         track.style.transform = `translateX(-${currentIndex * 100}%)`;
         updateDots();
     }
+    
     function updateDots() {
         const dots = document.querySelectorAll('.slider-dots .dot');
         dots.forEach((dot, i) => { dot.classList.toggle('active', i === currentIndex); });
     }
+    
     function nextSlide() { goToSlide((currentIndex + 1) % totalSlides); }
     function prevSlide() { goToSlide((currentIndex - 1 + totalSlides) % totalSlides); }
     function startAutoSlide() { if (autoInterval) clearInterval(autoInterval); autoInterval = setInterval(nextSlide, 5000); }
     function stopAutoSlide() { if (autoInterval) clearInterval(autoInterval); }
+    
     prevBtn.addEventListener('click', () => { prevSlide(); stopAutoSlide(); startAutoSlide(); });
     nextBtn.addEventListener('click', () => { nextSlide(); stopAutoSlide(); startAutoSlide(); });
+    
     const slider = document.querySelector('.slider-horizontal');
     slider.addEventListener('mouseenter', stopAutoSlide);
     slider.addEventListener('mouseleave', startAutoSlide);
+    
     createDots();
     goToSlide(0);
     startAutoSlide();
@@ -83,6 +102,7 @@ if (scrollBtn) {
         }, 16);
     };
     const stopScroll = () => { if (scrollInterval) { clearInterval(scrollInterval); scrollInterval = null; } };
+    
     scrollBtn.addEventListener('mousedown', (e) => { e.preventDefault(); startScroll(); });
     window.addEventListener('mouseup', stopScroll);
     scrollBtn.addEventListener('touchstart', (e) => { e.preventDefault(); startScroll(); });
