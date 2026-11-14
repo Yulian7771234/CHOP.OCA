@@ -1,11 +1,13 @@
 // ===== 1. ПЛАВНЫЙ СКРОЛЛ И БУРГЕР-МЕНЮ =====
 document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
         const targetId = this.getAttribute('href');
-        if (targetId === '#order-page') return;
+        if (targetId === '#' || targetId.startsWith('tel:') || targetId.startsWith('mailto:')) return; // Игнорируем кнопки звонка
+
+        e.preventDefault();
         const target = document.querySelector(targetId);
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
         const navLinks = document.getElementById('navLinks');
         if (navLinks && navLinks.classList.contains('active')) navLinks.classList.remove('active');
     });
@@ -20,29 +22,7 @@ if (burger && navLinks) {
     });
 }
 
-// ===== 2. МОДАЛЬНОЕ ОКНО ЗАКАЗА (Яндекс.Форма) =====
-const orderPageDiv = document.createElement('div');
-orderPageDiv.id = 'orderPage';
-orderPageDiv.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:1000;overflow-y:auto;padding:40px 20px;display:none;';
-orderPageDiv.innerHTML = `
-    <div style="max-width:650px;margin:0 auto;background:#ffffff;border:2px solid #ffffff;border-radius:48px;padding:32px 28px;box-shadow:0 20px 35px rgba(0,0,0,0.3);">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
-            <h2 style="color:#000000;font-size:2rem;font-weight:700;margin:0;">Оставить заявку</h2>
-            <button id="closeOrderPage" style="background:none;border:none;font-size:2rem;color:#000;cursor:pointer;">&times;</button>
-        </div>
-        <iframe src="https://forms.yandex.ru/u/6a20b88e49af4771382c7582?iframe=1" frameborder="0" name="ya-form-6a20b88e49af4771382c7582" style="width:100%; height:600px; border:none; background:#fff;"></iframe>
-    </div>
-`;
-document.body.appendChild(orderPageDiv);
-
-function openOrderPage() { orderPageDiv.style.display = 'block'; document.body.style.overflow = 'hidden'; }
-function closeOrderPage() { orderPageDiv.style.display = 'none'; document.body.style.overflow = ''; }
-document.getElementById('orderFloatBtn')?.addEventListener('click', openOrderPage);
-document.getElementById('orderNavBtn')?.addEventListener('click', (e) => { e.preventDefault(); openOrderPage(); });
-document.getElementById('closeOrderPage')?.addEventListener('click', closeOrderPage);
-orderPageDiv.addEventListener('click', (e) => { if (e.target === orderPageDiv) closeOrderPage(); });
-
-// ===== 3. СЛАЙДЕР =====
+// ===== 2. СЛАЙДЕР =====
 (function initSlider() {
     const images = ["img/auto.jpg", "img/gruppa.jpg", "img/monitor.avif"];
     const container = document.getElementById('companySlider');
@@ -91,7 +71,7 @@ orderPageDiv.addEventListener('click', (e) => { if (e.target === orderPageDiv) c
     startAutoSlide();
 })();
 
-// ===== 4. СТРЕЛКА ПРОКРУТКИ =====
+// ===== 3. СТРЕЛКА ПРОКРУТКИ =====
 const scrollBtn = document.getElementById('scrollDownBtn');
 if (scrollBtn) {
     let scrollInterval = null;
@@ -110,7 +90,7 @@ if (scrollBtn) {
     scrollBtn.addEventListener('mouseleave', stopScroll);
 }
 
-// ===== 5. COOKIE-БАННЕР + ЗАГРУЗКА МЕТРИКИ ТОЛЬКО ПОСЛЕ СОГЛАСИЯ =====
+// ===== 4. COOKIE-БАННЕР + ЗАГРУЗКА МЕТРИКИ =====
 function loadYandexMetrika() {
     if (document.querySelector('script[src*="mc.yandex.ru/metrika/tag.js"]')) return;
     const script = document.createElement('script');
@@ -142,10 +122,10 @@ function initCookieBanner() {
     banner.id = 'cookieConsentBanner';
     banner.innerHTML = `
         <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;">
-            <p style="margin:0;font-size:14px;">Мы используем cookie для улучшения работы сайта. Продолжая, вы даете согласие на обработку данных. Подробнее — <a href="privacy.html" target="_blank" style="color:#FFC107;">в Политике конфиденциальности</a>.</p>
+            <p style="margin:0;font-size:14px;">Мы используем cookie для улучшения работы сайта. Продолжая, вы даете согласие на обработку данных. Подробнее — <a href="privacy.html" target="_blank">в Политике конфиденциальности</a>.</p>
             <div style="display:flex;gap:15px;">
-                <button id="cookieAcceptBtn" style="background:#FFC107;color:#000;border:none;padding:8px 25px;border-radius:30px;cursor:pointer;font-weight:bold;min-width:140px;">Принять всё</button>
-                <button id="cookieRejectBtn" style="background:transparent;color:#FFC107;border:1px solid #FFC107;padding:8px 25px;border-radius:30px;cursor:pointer;min-width:140px;">Отклонить всё</button>
+                <button id="cookieAcceptBtn">Принять всё</button>
+                <button id="cookieRejectBtn">Отклонить всё</button>
             </div>
         </div>
     `;
